@@ -6,12 +6,16 @@ class App extends Component {
     super();
     this.state = {
       todos: [],
-      input: ""
+      input: "",
+      input_update: "",
+      edit_form: false,
+      update_target: 0
     };
     this.handleClick = this.handleClick.bind(this);
     this.editFormTogle = this.editFormTogle.bind(this);
     this.deletetodos = this.deletetodos.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
   }
 
   handleChange(event) {
@@ -29,15 +33,29 @@ class App extends Component {
     }));
   }
 
-  editFormTogle() {
+  editFormTogle(target_index) {
     this.setState((prevState, props) => ({
-      edit_form: !prevState.edit_form
+      edit_form: !prevState.edit_form,
+      update_target: target_index
     }));
   }
 
-  deletetodos(index) {
+  deletetodos(target_index) {
+    console.log(target_index);
     this.setState((prevState, props) => ({
-      edit_form: prevState.todos.splice(index, 1)
+      todos: prevState.todos.filter((todo, index) => index !== target_index)
+    }));
+  }
+
+  updateTodo() {
+    this.setState((prevState, props) => ({
+      todos: [
+        ...prevState.todos
+          .slice(0, this.state.update_target)
+          .concat(this.state.input_update),
+        ...prevState.todos.slice(this.state.update_target + 1)
+      ],
+      edit_form: false
     }));
   }
 
@@ -62,9 +80,22 @@ class App extends Component {
             editFormTogle={this.editFormTogle}
             deletetodos={this.deletetodos}
           />
-          {/*
-            this.state.edit_form ? (  <input className="edit-form" type="text" id="input" placeholder="edit here ..."/>) : ("")
-          */}
+          {this.state.edit_form ? (
+            <div>
+              <input
+                className="edit-form"
+                type="text"
+                id="input"
+                onChange={this.handleChange}
+                name="input_update"
+                placeholder="edit here ..."
+                value={this.state.input_update}
+              />
+              <button onClick={this.updateTodo}>Update</button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

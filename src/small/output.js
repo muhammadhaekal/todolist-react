@@ -5,7 +5,11 @@ function output(props) {
     <div>
       <div className="output">
         {props.todos.map((todo, index) => (
-          <div key={index} className="todo" onDoubleClick={props.editFormTogle}>
+          <div
+            key={index}
+            className="todo"
+            onDoubleClick={() => props.editFormTogle(index)}
+          >
             <div className="todo-text">{todo} </div>
             <div
               className="todo-delete"
