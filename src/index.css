@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  zoom: 150%;
+}
+
+.title {
+  color: blue;
+}
+
+.output {
+  border-style: solid;
+  border-color: blue;
+  height: 300px;
+  width: 30%;
+  overflow: auto;
+}
+
+#input {
+  border-color: blue;
+  margin-bottom: 5px;
+  width: 30%;
+  margin-right: 5px;
+}
+
+.container {
+  margin-left: 20px;
+}
+
+.todo {
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-form {
+  border-color: blue;
+  width: 30%;
+  margin-top: 5px;
+}
