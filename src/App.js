@@ -5,18 +5,27 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      todos: []
-      // ,
-      // edit_form: false
+      todos: [],
+      input: ""
     };
     this.handleClick = this.handleClick.bind(this);
     this.editFormTogle = this.editFormTogle.bind(this);
     this.deletetodos = this.deletetodos.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    var param = event.target.name;
+    var value = event.target.value;
+
+    this.setState({ [param]: value });
+    // console.log(this.state.review);
   }
 
   handleClick() {
     this.setState((prevState, props) => ({
-      todos: prevState.todos.concat(`todo ${prevState.todos.length}`)
+      todos: prevState.todos.concat(prevState.input),
+      input: ""
     }));
   }
 
@@ -27,7 +36,6 @@ class App extends Component {
   }
 
   deletetodos(index) {
-    console.log(index);
     this.setState((prevState, props) => ({
       edit_form: prevState.todos.splice(index, 1)
     }));
@@ -40,7 +48,13 @@ class App extends Component {
           <h1 className="title" onClick={this.deletetodos}>
             Impact todo
           </h1>
-          <input type="text" id="input" />
+          <input
+            type="text"
+            onChange={this.handleChange}
+            id="input"
+            name="input"
+            value={this.state.input}
+          />
           <button onClick={this.handleClick}>Add</button>
           {/*<div className="output" />*/}
           <Output
