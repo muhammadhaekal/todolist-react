@@ -16,7 +16,7 @@ class App extends Component {
 
   handleClick() {
     this.setState((prevState, props) => ({
-      todos: ["tetttsts"]
+      todos: prevState.todos.concat(`todo ${prevState.todos.length}`)
     }));
   }
 
@@ -27,6 +27,7 @@ class App extends Component {
   }
 
   deletetodos(index) {
+    console.log(index);
     this.setState((prevState, props) => ({
       edit_form: prevState.todos.splice(index, 1)
     }));
@@ -37,7 +38,7 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <h1 className="title" onClick={this.deletetodos}>
-            Impact todo {JSON.stringify(this.state.edit_form)}
+            Impact todo
           </h1>
           <input type="text" id="input" />
           <button onClick={this.handleClick}>Add</button>
