@@ -48,13 +48,18 @@ class App extends Component {
   }
 
   updateTodo() {
-    this.setState((prevState, props) => ({
-      todos: [
-        ...prevState.todos
-          .slice(0, this.state.update_target)
-          .concat(this.state.input_update),
-        ...prevState.todos.slice(this.state.update_target + 1)
-      ],
+    let todos = Object.assign(this.state.todos);
+    // let todos = this.state.todos;
+
+    todos[this.state.update_target] = this.state.input_update;
+    this.setState(prevState => ({
+      // todos: [
+      //   ...prevState.todos
+      //     .slice(0, this.state.update_target)
+      //     .concat(this.state.input_update),
+      //   ...prevState.todos.slice(this.state.update_target + 1)
+      // ],
+      todos: todos,
       edit_form: false
     }));
   }
